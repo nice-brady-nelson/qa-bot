@@ -396,3 +396,22 @@
 5. Monitor the browser network tab for all `DataMemorialization` calls throughout the full session
 
 **Expected Result:** DM fires exactly once per DM-configured CRM with linked entities. No duplicate `DataMemorialization` API calls appear for the same CRM and contact.
+
+---
+
+**TC22** `[AGTINT][CXA][Multi-CRM][DataMemorialization][Voice] Contact is transferred → exactly one DM call fires per CRM with a fully populated payload; no second blank-payload DM call fires`
+
+**Preconditions:**
+- Multi-CRM feature toggle is ON
+- Two CRMs configured with Data Memorialization
+- Agent is on a live voice contact
+- Browser network tab is accessible for monitoring requests
+
+**Steps:**
+1. Accept an inbound voice contact
+2. Link at least one entity per DM-configured CRM
+3. Initiate and complete a contact transfer
+4. In the browser network tab, filter for all `DataMemorialization` requests and capture the full request list
+5. For each DM call that fires, open the request and inspect the payload body
+
+**Expected Result:** Exactly one `DataMemorialization` call fires per DM-configured CRM. Each call has a fully populated payload containing the linked entity data. No second DM call with an empty or blank payload fires alongside the real call for any CRM. Total DM call count equals the number of DM-configured CRMs — no extra calls.

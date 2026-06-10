@@ -3,7 +3,7 @@
 **Epic:** CXIFW-381  
 **Feature:** Multi-CRM Contact Transfer  
 **Date:** May 2026
-**Total TCs:** 21
+**Total TCs:** 22
 
 ---
 
@@ -349,3 +349,24 @@ call. The data should be memorialized based on your data mapping.
 5. Ensure data memorializes as configured, including timeline
 
 **Expected Result:** A Data Memorialization network call fires for the transferred-to contact when the receiving agent ends the call.
+
+---
+
+**TC19** `[AGTINT][CXA][Multi-CRM][ContactTransfer][Voice] Contact 1 is transferred and DM fires → Contact 2 links a different record and DM fires correctly on hang up with no stale state carried over from Contact 1`
+
+**Preconditions:**
+- Multi-CRM feature toggle is ON
+- Two CRMs configured and active with Data Memorialization enabled
+- Browser network tab is accessible for monitoring DM requests
+
+**Steps:**
+1. Accept an inbound voice Contact 1 with two CRMs active
+2. Link at least one entity per DM-configured CRM (Record A in each)
+3. Initiate and complete a contact transfer
+4. Confirm DM fires for Contact 1 — inspect the payload and verify Record A is present
+5. Accept a new inbound voice Contact 2
+6. In each DM-configured CRM panel, link a **different** entity (Record B) — do not re-link Record A
+7. End Contact 2 by hanging up
+8. Inspect all `DataMemorialization` network requests fired for Contact 2
+
+**Expected Result:** DM fires for Contact 2 with Record B present in the payload. Record A from Contact 1 does not appear anywhere in the Contact 2 DM payload. No blank or empty DM payload fires. The transfer context from Contact 1 has no effect on Contact 2's DM behavior.
