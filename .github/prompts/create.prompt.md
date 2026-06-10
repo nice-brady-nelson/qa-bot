@@ -6,7 +6,7 @@ argument-hint: 'Jira key of high-level test plan (e.g. CRM-1234)'
 
 Generate tests based on the provided high-level test plan, found using the Atlassian MCP (BN-ROVO-MCP).
 
-Ensure that the generated tests are comprehensive, covering all relevant scenarios and edge cases. The test cases should first be generated in their own file following the format of other files found in the "TC Files" folder, and then after user approval, they should be posted to Jira using the "post-tests-to-jira" skill.
+Ensure that the generated tests are comprehensive, covering all relevant scenarios and edge cases. The test cases should first be generated in their own file following the format of other files found in the "TC-Files" folder, and then after user approval, they should be posted to Jira using the "post-tests-to-jira" skill. If there is not a "TC-Files" folder, please create one.
 
 ---
 
