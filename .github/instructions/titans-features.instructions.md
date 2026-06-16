@@ -1,5 +1,5 @@
 ---
-description: Loaded when creating test cases or test plans to better understand feature functionality and edge cases.
+description: Loaded when creating any test cases or test plans to better understand feature functionality and edge cases.
 applyTo: 'Will be applied to any prompt that involves the creation of test cases or test plans, as these are the core features owned the Connect Agent - Titans team.'
 ---
 

@@ -1,6 +1,7 @@
 ---
 description: "Use when removing, retiring, or marking Jira test cases as obsolete. Covers the workflow transition chain required to move a Test issue to Removed status in the CRM project."
 ---
+
 # Removing Jira Test Cases
 
 To move a Test issue to **Removed** status, the workflow requires three sequential transitions. There is no direct path from Design to Removed.
