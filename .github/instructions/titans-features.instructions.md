@@ -125,6 +125,15 @@ Determines whether data is rendered on the Customer Card in the agent's view. If
 - For Multi-CRM: labels for create options need to be descriptive for which CRM instance the record will be created in
 - **Tested by Titans QA (Sarah Castaneda) across CSA releases** — confirmed passing in 25.3 and 25.4 testing cycles [CSA25.4 Agent Experience](https://nice-ce-cxone-prod.atlassian.net/wiki/spaces/csa/pages/3424410089/CSA25.4+Agent+Experience)
 
+**Deep Dive:** In Agent Workspace (Embedded), Agent Create lets an agent click Create New in the Related Interactions section of the customer card and choose the type of CRM record they want to create while handling an interaction. The record is created by the configured system user for that CRM integration, not by the agent identity directly.
+For the manual-create setup, the NiCE docs say you modify the Studio script by adding a SNIPPET and a CUSTOMEVENT named Agent Workflow Create Payload. The snippet builds the create configuration, and the custom event passes that configuration into Agent Workspace so the UI can render the create options.
+Inside that snippet, you define one or more create payload objects. Each payload includes at least:
+- a display label shown to the agent
+- a workflowInput object containing the create data
+- a configurationId that identifies the CRM configuration in Agent Integrations
+- and a workflowId that identifies the CRM workflow to run
+The docs then have you put those payloads into a list and send the list as JSON through the custom event. NiCE explicitly documents that if you want agents to be able to create more than one type of record, you include more than one workflow/payload in that same snippet list.
+
 ---
 
 ## 8. Script Variables

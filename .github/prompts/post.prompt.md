@@ -18,6 +18,6 @@ When the test cases are created in Jira, they need to have the following:
   - Agent_Integrations
   - CXAgent
   - mcp-auto-generated
-  - implemented by AI agent set to yes
+  - implemented by AI agent field (if present) set to yes
   - [Feature] (**ASK USER FOR THIS**, eg. Multi_CRM)
   - [Sub-Feature] (**ASK USER FOR THIS**, eg. ScreenPop)
