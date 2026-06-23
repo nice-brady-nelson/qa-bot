@@ -1,7 +1,7 @@
 ---
 name: create-test-plan
 description: 'Generate a high-level test plan for a given feature or epic'
-argument-hint: 'Jira key of the epic (e.g. CRM-1234)'
+argument-hint: 'Jira key of the epic (e.g. CXIFW-1234)'
 ---
 
 Generate a high-level test plan for a given feature or epic, found using the Atlassian MCP (BN-ROVO-MCP).

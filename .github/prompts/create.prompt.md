@@ -1,7 +1,7 @@
 ---
 name: generate-tests
 description: 'Generate QA test cases based on a previously created high-level test plan for a given Jira epic.'
-argument-hint: 'Jira key of high-level test plan (e.g. CRM-1234)'
+argument-hint: 'Jira key of high-level test plan (e.g. CXIFW-1234)'
 ---
 
 Generate tests based on the provided high-level test plan, found using the Atlassian MCP (BN-ROVO-MCP).

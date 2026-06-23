@@ -7,7 +7,7 @@ argument-hint: 'File containing test cases.'
 Create the pre-made test cases in Jira, using the Atlassian MCP (BN-ROVO-MCP).
 
 When the test cases are created in Jira, they need to have the following:
-- Be in the CRM project
+- Be in the CXIFW project (Test Repository for project CX_Integration Framework)
 - Team name: Connected Agent - Titans
 - Assignee: Brady Nelson
 - Regression set to Yes
