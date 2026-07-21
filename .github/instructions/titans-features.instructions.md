@@ -242,4 +242,4 @@ Sources:
 
 14. https://nice-ce-cxone-prod.atlassian.net/wiki/spaces/IN/pages/317359512/Dynamic+Data+-+Studio+Configuration
 
-15. https://nice-ce-cxone-prod.atlassian.net/browse/WEMDOC-9152
+15. https://nice-ce-cxone-prod.atlassian.net/browse/WEMDOC-9152i
