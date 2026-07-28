@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "qa-bot",
+  "description": "QA tooling for the CXone Connected Agent - Titans team. Turns a Jira epic into a reviewed, posted set of Xray test cases.",
+  "owner": {
+    "name": "Brady Nelson",
+    "url": "https://github.com/nice-brady-nelson"
+  },
+  "plugins": [
+    {
+      "name": "qa-bot",
+      "description": "QA agent for the CXone Connected Agent - Titans team: plans, generates, and posts Jira/Xray test cases.",
+      "source": "./",
+      "version": "1.0.0",
+      "category": "testing"
+    }
+  ]
+}

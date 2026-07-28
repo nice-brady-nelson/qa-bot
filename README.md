@@ -16,15 +16,36 @@ The plugin drives a three-stage QA workflow. Each stage stops for your approval 
 
 ## Install
 
-Place this directory as a local plugin in `user/.claude/skills/`. The bundled `mcp.json` registers the Atlassian MCP server (`https://mcp.atlassian.com/v1/mcp`) — you will be prompted to authenticate on first use.
+This repo is its own single-plugin marketplace. In Claude Code:
+
+```
+/plugin marketplace add nice-brady-nelson/qa-bot
+/plugin install qa-bot@qa-bot
+```
+
+To pick up a new release afterwards:
+
+```
+/plugin update qa-bot@qa-bot
+```
+
+The bundled `mcp.json` registers the Atlassian MCP server (`https://mcp.atlassian.com/v1/mcp`) — you will be prompted to authenticate on first use.
 
 ### Xray credentials (optional)
 
-Only needed if you want to inspect the Xray test repository folder tree. Copy the template and fill it in:
+Only needed if you want to inspect the Xray test repository folder tree.
+
+**Set them as user environment variables** — this is the recommended route for an installed plugin, since `/plugin update` replaces the plugin directory and would wipe a `.env` living inside it.
+
+```powershell
+[Environment]::SetEnvironmentVariable("XRAY_CLIENT_ID", "...", "User")
+[Environment]::SetEnvironmentVariable("XRAY_CLIENT_SECRET", "...", "User")
+```
+
+For local development against a clone, a `.env` works too:
 
 ```bash
-cd skills/xray-test-repository/
-cp .env.example .env
+cp skills/xray-test-repository/.env.example skills/xray-test-repository/.env
 ```
 
 ```
@@ -32,7 +53,7 @@ XRAY_CLIENT_ID=...
 XRAY_CLIENT_SECRET=...
 ```
 
-`.env` is gitignored — **never commit real credentials.** You can also just export the two variables in your shell instead.
+`.env` is gitignored — **never commit real credentials.**
 
 ---
 
@@ -124,10 +145,11 @@ Defined in `CLAUDE.md` and applied to every session:
 
 ```
 QA-Bot-Claude/
-├── .claude-plugin/plugin.json
+├── .claude-plugin/
+│   ├── plugin.json              # plugin manifest
+│   └── marketplace.json         # single-plugin marketplace, source "./"
 ├── CLAUDE.md                    # persona, flow, behavior rules
 ├── mcp.json                     # Atlassian MCP server
-├── .env.example                 # Xray credential template
 ├── commands/
 │   ├── create-test-plan.md
 │   ├── generate-tests.md
@@ -139,6 +161,7 @@ QA-Bot-Claude/
     ├── remove-jira-test-cases/SKILL.md
     └── xray-test-repository/
         ├── SKILL.md
+        ├── .env.example         # Xray credential template
         └── scripts/
 ```
 
