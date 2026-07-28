@@ -1,7 +1,4 @@
----
-description: Loaded when creating any test cases or test plans to better understand feature functionality and edge cases.
-applyTo: 'Will be applied to any prompt that involves the creation of test cases or test plans, as these are the core features owned the Connected Agent - Titans team.'
----
+# Titans Feature Reference
 
 Here is a comprehensive analysis of the **Connect Agented – Titans Team** features within CX_CRM, synthesized from internal Confluence documentation, Jira issues, architecture docs, and release testing records.
 

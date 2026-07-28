@@ -1,6 +1,4 @@
----
-description: Load for context when dealing with agentCreate-related test cases and test plans.
----
+# Agent Create — Multi-CRM Single Snippet
 
 Here’s a **practical test plan / implementation guide** for validating **multi-CRM manual create with one snippet** in Agent Workspace (Embedded), with the expectation that **newly created records appear under separate CRM-labeled trays on the customer card** for your new feature. I’m going to frame this as a **testable hypothesis** based on how NiCE documents manual create today. [\[help.nicecxone.com\]](https://help.nicecxone.com/content/agent/cxoneagent/usecustomercardcxa.htm)
 

@@ -1,5 +1,6 @@
 ---
-description: "Use when removing, retiring, or marking Jira test cases as obsolete. Covers the workflow transition chain required to move a Test issue to Removed status in the CRM project."
+name: remove-jira-test-cases
+description: Use when removing, retiring, or marking Jira test cases as obsolete. Covers the three-step workflow transition chain required to move a Test issue to Removed status in the NICE CXone Prod instance.
 ---
 
 # Removing Jira Test Cases
@@ -17,6 +18,7 @@ To move a Test issue to **Removed** status, the workflow requires three sequenti
 ## Process
 
 For each issue to remove:
+
 1. Call `transitionJiraIssue` with transition ID `11` (Design → Reviewing)
 2. Call `transitionJiraIssue` with transition ID `41` (Reviewing → Active)
 3. Call `transitionJiraIssue` with transition ID `101` (Active → Removed)
