@@ -45,7 +45,7 @@ Only needed if you want to inspect the Xray test repository folder tree.
 For local development against a clone, a `.env` works too:
 
 ```bash
-cp skills/xray-test-repository/.env.example skills/xray-test-repository/.env
+cp skills/xray/.env.example skills/xray/.env
 ```
 
 ```
@@ -104,14 +104,14 @@ The SKILL.md is a short router; the substance sits in `references/` and is loade
 
 The three-transition chain (Designed → Reviewed → Remove) required to retire a Jira Test issue. There is no direct Design → Removed path, so this exists to stop Claude from guessing.
 
-### `xray-test-repository`
+### `xray`
 
-Authenticates to the Xray Cloud API and inspects test repository folder structure and test counts — useful for deciding which folder new tests belong in. The Atlassian MCP covers Jira issues; the folder tree is Xray-only.
+General-purpose skill for working with the Xray Cloud API directly — the Atlassian MCP covers Jira issues, but Xray-specific concepts (test repository folders, test executions, test runs) are Xray-only. Loads automatically for context (e.g. deciding which folder new tests belong in) and can also be invoked directly for ad hoc Xray work like inspecting the folder tree or mass test execution.
 
 ```powershell
-./skills/xray-test-repository/scripts/xray_auth.ps1
-./skills/xray-test-repository/scripts/xray_folders.ps1 -OutFile "$env:TEMP\xray_tree.json"
-./skills/xray-test-repository/scripts/xray_print_tree.ps1 "$env:TEMP\xray_tree.json"
+./skills/xray/scripts/xray_auth.ps1
+./skills/xray/scripts/xray_folders.ps1 -OutFile "$env:TEMP\xray_tree.json"
+./skills/xray/scripts/xray_print_tree.ps1 "$env:TEMP\xray_tree.json"
 ```
 
 `xray_auth.ps1` caches a short-lived JWT in `$env:TEMP`; re-run it if you start getting 401s. PowerShell only.
@@ -159,7 +159,7 @@ QA-Bot-Claude/
     │   ├── SKILL.md
     │   └── references/
     ├── remove-jira-test-cases/SKILL.md
-    └── xray-test-repository/
+    └── xray/
         ├── SKILL.md
         ├── .env.example         # Xray credential template
         └── scripts/
@@ -177,6 +177,6 @@ QA-Bot-Claude/
 | `.github/prompts/post.prompt.md` | `commands/post-tests-to-jira.md` |
 | `.github/instructions/titans-*.md`, `agent-create-multi-snippet` | `skills/titans-context/references/` |
 | `.github/instructions/remove-TC.instructions.md` | `skills/remove-jira-test-cases/` |
-| `xray_*.ps1` (root) | `skills/xray-test-repository/scripts/` |
+| `xray_*.ps1` (root) | `skills/xray/scripts/` |
 
 The Xray scripts were changed in the port: credentials now come from the environment instead of being hardcoded, and the tree printer takes a file path or stdin instead of a hardcoded VS Code temp file.

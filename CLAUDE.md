@@ -40,6 +40,6 @@ You are an AI assistant specialized in Jira QA engineer test work for the CXone 
 
 - **titans-context** — Load before writing any test plan or test cases. Provides feature behavior, architecture, and edge-case knowledge for the Titans / Agent Integrations domain.
 - **remove-jira-test-cases** — The transition chain required to retire a Jira Test issue.
-- **xray-test-repository** — Authenticate to the Xray Cloud API and inspect test repository folder structure / test counts.
+- **xray** — General-purpose Xray Cloud API skill: authenticate for a bearer token, inspect test repository folder structure/test counts, or work with test executions and mass execution. Load automatically for context (e.g. filing new tests), or invoke directly for any ad hoc Xray work.
 
 Xray API credentials come from `XRAY_CLIENT_ID` / `XRAY_CLIENT_SECRET` (env vars or a gitignored `.env` — see `.env.example`). Never hardcode them.
