@@ -120,12 +120,14 @@ General-purpose skill for working with the Xray Cloud API directly — the Atlas
 
 ## Configuration reference
 
+This plugin was designed for the Titans team, but could be modified to work with other teams' workflows. Reference what the plugin uses in table below if you'd like to change any configurations so it works for your team.
+
 | Item | Value |
 |---|---|
+| Team | Connected Agent - Titans |
 | Jira & Confluence | `https://nice-ce-cxone-prod.atlassian.net` |
 | cloudId | `0e508bed-9911-4fa0-9106-53d761fb5715` |
 | Test repository project | `CXIFW` (CX_Integration Framework) — numeric id `13458` for Xray GraphQL |
-| Team | Connected Agent - Titans |
 | Standard labels | `AGENTIC_AI_CODE`, `Agent_Integrations`, `CXAgent`, `mcp-auto-generated`, plus Feature and Sub-Feature |
 
 ---
@@ -168,6 +170,8 @@ QA-Bot-Claude/
 ---
 
 ## Ported from
+
+I originally developed this plugin for Copilot in VS Code. The below table details the previous agent/skills setup and how it was ported to a Claude Code plugin.
 
 | VS Code (QA-Bot) | Here |
 |---|---|
