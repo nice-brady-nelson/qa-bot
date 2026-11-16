@@ -29,7 +29,7 @@ To pick up a new release afterwards:
 /plugin update qa-bot@qa-bot
 ```
 
-The bundled `mcp.json` registers the Atlassian MCP server (`https://mcp.atlassian.com/v1/mcp`) — you will be prompted to authenticate on first use.
+The bundled `mcp.json` registers the Atlassian MCP server (`https://mcp.atlassian.com/v2/mcp`) — you will be prompted to authenticate on first use.
 
 ### Xray credentials (optional)
 
@@ -90,13 +90,24 @@ Skills load automatically when the work calls for them — you do not need to in
 
 Domain knowledge for the Titans / Agent Integrations system. Claude reads this before writing plans or test cases so assertions are grounded in real feature behavior rather than guesses.
 
-The SKILL.md is a short router; the substance sits in `references/` and is loaded selectively:
+The system knowledge (features, architecture, plain-English overview, glossary) lives in the **Titans knowledge library**, the `knowledge-library/` folder of the Titans agentic platform repo, under the `titans-crm-integrations` domain. The SKILL.md is a pointer: it finds the library, reads its table of contents, and loads only the matching entries.
+
+The skill finds the library in this order:
+
+1. The `TITANS_KB_PATH` environment variable, pointing at the `knowledge-library` folder.
+2. The marketplace clone, when qa-bot is installed from the Titans agentic platform.
+3. Otherwise it asks you.
+
+To avoid being asked, set it once:
+
+```powershell
+[Environment]::SetEnvironmentVariable("TITANS_KB_PATH", "C:\path\to\Titans-agentic-platform\knowledge-library", "User")
+```
+
+Two qa-bot-specific references stay local in `references/`:
 
 | Reference | Contents |
 |---|---|
-| `titans-features.md` | Default starting point. Per-feature behavior, trigger points, and known limitations — Data Memorialization, Multi-CRM, ScreenPop, Related/Current Interactions, Agent Create, Dynamic Data. The richest source of edge cases. |
-| `titans-plain-english.md` | Analogy-first orientation to the whole system. Read this first if you're new to the domain. |
-| `titans-architecture-deep-dive.md` | Exact payloads, cache keys, repo names, file paths, hop-by-hop data flow. Used for per-layer failure modes and negative tests. |
 | `agent-create-multi-snippet.md` | Agent Create / manual create: snippet payload lists, `configurationId` + `workflowId` routing, `cacheResponse`, multi-CRM create trays. |
 | `tc-examples/` | Two representative TC files (`relatesTo-multiCRM-TCs.md`, `screenpop-TCs.md`) used as format exemplars. |
 
@@ -179,7 +190,8 @@ I originally developed this plugin for Copilot in VS Code. The below table detai
 | `.github/prompts/plan.prompt.md` | `commands/create-test-plan.md` |
 | `.github/prompts/create.prompt.md` | `commands/generate-tests.md` |
 | `.github/prompts/post.prompt.md` | `commands/post-tests-to-jira.md` |
-| `.github/instructions/titans-*.md`, `agent-create-multi-snippet` | `skills/titans-context/references/` |
+| `.github/instructions/titans-*.md` | Titans knowledge library (`titans-crm-integrations` domain) |
+| `agent-create-multi-snippet` | `skills/titans-context/references/` |
 | `.github/instructions/remove-TC.instructions.md` | `skills/remove-jira-test-cases/` |
 | `xray_*.ps1` (root) | `skills/xray/scripts/` |
 

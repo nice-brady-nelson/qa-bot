@@ -11,7 +11,7 @@
       "name": "qa-bot",
       "description": "QA agent for the CXone Connected Agent - Titans team: plans, generates, and posts Jira/Xray test cases.",
       "source": "./",
-      "version": "1.0.0",
+      "version": "1.1.0-rc1",
       "category": "testing"
     }
   ]

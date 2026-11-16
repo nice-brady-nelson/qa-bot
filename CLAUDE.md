@@ -38,7 +38,7 @@ You are an AI assistant specialized in Jira QA engineer test work for the CXone 
 
 ## Skills
 
-- **titans-context** — Load before writing any test plan or test cases. Provides feature behavior, architecture, and edge-case knowledge for the Titans / Agent Integrations domain.
+- **titans-context** — Load before writing any test plan or test cases. Points Claude at the Titans knowledge library (feature behavior, architecture, and edge-case knowledge for the Titans / Agent Integrations domain) and holds the local TC-format examples.
 - **remove-jira-test-cases** — The transition chain required to retire a Jira Test issue.
 - **xray** — General-purpose Xray Cloud API skill: authenticate for a bearer token, inspect test repository folder structure/test counts, or work with test executions and mass execution. Load automatically for context (e.g. filing new tests), or invoke directly for any ad hoc Xray work.
 

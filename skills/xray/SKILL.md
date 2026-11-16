@@ -1,6 +1,7 @@
 ---
 name: xray
 description: Use when working with the Xray Cloud API directly — authenticating for a bearer token, inspecting the test repository folder tree (paths, test counts, where a new test case belongs), or working with test executions/test runs (mass execution, bulk result import, execution status). Applies to any Xray Cloud REST/GraphQL work that the Atlassian MCP doesn't cover, whether triggered automatically by the plugin (e.g. deciding a folder for `/generate-tests` output) or invoked directly by the user for ad hoc Xray tasks.
+user-invocable: true
 ---
 
 # Xray

@@ -1,6 +1,7 @@
 ---
 name: remove-jira-test-cases
 description: Use when removing, retiring, or marking Jira test cases as obsolete. Covers the three-step workflow transition chain required to move a Test issue to Removed status in the NICE CXone Prod instance.
+user-invocable: true
 ---
 
 # Removing Jira Test Cases
@@ -22,6 +23,8 @@ For each issue to remove:
 1. Call `transitionJiraIssue` with transition ID `11` (Design → Reviewing)
 2. Call `transitionJiraIssue` with transition ID `41` (Reviewing → Active)
 3. Call `transitionJiraIssue` with transition ID `101` (Active → Removed)
+
+If `transitionJiraIssue` isn't in your tool list (Atlassian MCP v2 exposes some operations only through `discover` / `execute*`), run `discover` with "transition a jira issue" and call it through the execute tool it names.
 
 Repeat for every issue. Transitions must be applied sequentially per issue — each step must succeed before the next.
 

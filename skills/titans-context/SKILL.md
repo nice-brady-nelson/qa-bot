@@ -1,30 +1,41 @@
 ---
 name: titans-context
 description: Load domain context for the CXone Connected Agent - Titans team (Agent Integrations / CX_CRM) before writing test plans, test cases, or reasoning about feature behavior. Covers Data Memorialization, Multi-CRM, ScreenPop, Agent Create workflows, Related/Current Interactions, and the Studio → Monolith → Lambda → Tray.io → CRM data flow. Use whenever a task involves Titans features, AGTINT test cases, or understanding how CXone Agent talks to a CRM.
+user-invocable: false
 ---
 
 # Titans Context
 
-Domain knowledge for the CXone Connected Agent - Titans team. Read only the references you need — do not load all of them.
+Titans domain knowledge lives in the **Titans knowledge library** (the `knowledge-library/` folder of the Titans agentic platform repo), not in this skill. This skill tells you how to find it and keeps only the qa-bot-specific test-case templates locally.
 
-## Which reference to read
+## 1. Locate the library
+
+Use the first of these that exists:
+
+1. The path in the `TITANS_KB_PATH` environment variable (the `knowledge-library` folder itself).
+2. `~/.claude/plugins/marketplaces/*/knowledge-library/TABLE-OF-CONTENTS.md`, i.e. the marketplace clone when qa-bot was installed from the Titans agentic platform.
+3. Otherwise, ask the user where their clone of the Titans agentic platform repo is, and suggest they set `TITANS_KB_PATH` so they aren't asked again.
+
+## 2. Load only what you need
+
+1. If `TABLE-OF-CONTENTS.md` is already in your context, don't read it again. Otherwise read it **once**.
+2. Open only the entries whose **description** matches the task. Never load the whole library.
+3. Titans system knowledge is mostly in the `titans-crm-integrations` domain:
+   - **`orientation`**: plain-English overview, identifiers glossary, and **test-planning approach**. Read the test-planning approach first for any test plan or test-case work.
+   - **`architecture`**: system map/ownership, end-to-end request flow, the interaction cache, the Lambda, Tray.io, the DynamoDB config, repos. Use it for per-hop failure modes and negative/error-isolation cases.
+   - **`features`**: Data Memorialization, ScreenPop, Related/Current Interactions, Relates To, Agent Create, Search & Dynamic Data, Multi-CRM. Each feature's trigger points and limitations are the richest source of edge cases.
+4. Related entries in `cxone-agent-testing` and `webapp-acd-agent-apps` are cross-linked from those entries. Follow the links when relevant.
+
+If knowledge you expected isn't findable from the descriptions, mention it to the user as a retrieval miss for `/librarian audit`.
+
+## 3. Local references (qa-bot only)
 
 | Read this | When |
 |---|---|
-| `references/titans-features.md` | **Default starting point** for any test plan or test cases. What each feature does, trigger points, known limitations, and edge cases per feature (Data Memorialization, Multi-CRM, ScreenPop, Related/Current Interactions, Agent Create, Dynamic Data). |
-| `references/titans-plain-english.md` | You need intuition first, or you're orienting on the system from scratch. Analogy-driven walkthrough of the same system. Read before the deep dive. |
-| `references/titans-architecture-deep-dive.md` | You need exact payloads, cache keys, repo names, file paths, or the end-to-end hop-by-hop data flow — e.g. reasoning about where a failure could occur, or writing negative/error-isolation test cases. |
+| `references/tc-examples/` | You're about to write a TC file and need the established format. Two representative examples: `relatesTo-multiCRM-TCs.md` and `screenpop-TCs.md`. |
 | `references/agent-create-multi-snippet.md` | The work involves Agent Create (manual create), create snippets, `configurationId`/`workflowId` payload lists, or multi-CRM create trays on the customer card. |
-| `references/tc-examples/` | You are about to write a TC file and need the established format. Two representative examples: `relatesTo-multiCRM-TCs.md` and `screenpop-TCs.md`. |
 
-## Key facts
+## Ground rules for test work
 
-- **Jira & Confluence:** `https://nice-ce-cxone-prod.atlassian.net`
-- **cloudId:** `0e508bed-9911-4fa0-9106-53d761fb5715`
-- **Mental model:** Studio / CXA → C# Monolith → Node Lambda (direct `Lambda.invoke`, no API Gateway) → Tray.io → CRM, with results written to an ElastiCache Redis interaction cache keyed by `cacheKey` that the agent Customer Card reads back.
-
-## How to use this in test work
-
-1. Read `titans-features.md` for the feature under test — its trigger points and known limitations are the richest source of edge cases.
-2. If the feature spans layers (transfers, DM, error isolation), read the architecture deep dive to identify per-hop failure modes worth covering.
-3. Ground every assertion in documented behavior. Where the docs do not guarantee a behavior (notably multi-CRM in a single create snippet), treat the test as **product validation of a new feature**, not verification of documented behavior — and say so in the plan.
+- Ground every assertion in documented behavior. Where the docs don't guarantee a behavior (notably multi-CRM in a single create snippet), treat the test as **product validation of a new feature**, not verification of documented behavior, and say so in the plan.
+- If the library can't be found and the user can't supply it, say so plainly rather than writing tests from memory.
