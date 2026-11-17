@@ -1,5 +1,10 @@
 # QA-Bot-Claude
 
+> **⚠️ This repo is archived and has moved.** The plugin is now **`titans-test-cases`** in
+> [Titans-agentic-platform](https://github.com/NiCE-AI-Marketplace/Titans-agentic-platform/tree/main/plugin/titans-test-cases).
+> Its Titans domain knowledge now lives in that repo's `knowledge-library/`. Install `titans-test-cases` instead of `qa-bot`.
+
+
 A Claude Code plugin that turns a Jira epic into a reviewed, posted set of Xray test cases for the **CXone Connected Agent - Titans** team.
 
 ---
